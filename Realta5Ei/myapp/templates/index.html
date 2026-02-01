@@ -1,0 +1,640 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giornata della Memoria - Ricordare per non dimenticare</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="shortcut icon" href="{% static 'candle.png' %}">
+</head>
+<body>
+
+    <div class="particles-container" id="particles"></div>    <nav class="navbar">
+        <div class="scroll-progress-bar"></div>
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <div class="icon-pulse"></div>
+                    ✡
+                </div>
+                <span class="brand-text">Giornata della Memoria</span>
+            </div>
+            <div class="nav-center">
+                <div class="memory-counter" id="memoryCounter">
+                    <span class="counter-label">Anni dalla liberazione</span>
+                    <span class="counter-value">80</span>
+                </div>
+            </div>
+            <div class="nav-date">
+                <div class="date-icon">📅</div>
+                27 Gennaio 2026
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero" id="hero">
+            <div class="hero-background"></div>
+
+            <div class="memorial-flame">
+                <div class="flame"></div>
+                <div class="flame-reflection"></div>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-shine"></span>
+                    27 Gennaio
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line" data-text="Ricordare">Ricordare</span>
+                    <span class="title-line" data-text="per non">per non</span>
+                    <span class="title-line" data-text="dimenticare">dimenticare</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="subtitle-word">Commemorazione</span>
+                    <span class="subtitle-word">delle</span>
+                    <span class="subtitle-word">vittime</span>
+                    <span class="subtitle-word">dell'Olocausto</span>
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-number" data-target="{{ articles.count }}">0</div>
+                        <div class="stat-label">Progetti</div>
+                    </div>
+                    <div class="stat-box" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-icon">🕯️</div>
+                        <div class="stat-number">6M+</div>
+                        <div class="stat-label">Ricordati</div>
+                    </div>
+                    <div class="stat-box" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-icon">🌟</div>
+                        <div class="stat-number" data-target="80">0</div>
+                        <div class="stat-label">Anni</div>
+                    </div>
+                </div>
+
+                <div class="hero-scroll">
+                    <span>Scorri per esplorare</span>
+                    <div class="scroll-arrow">
+                        <div class="arrow-line"></div>
+                        <div class="arrow-tip"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <div class="container">
+                <div class="intro-card">
+                    <div class="card-decoration"></div>
+                    <div class="intro-icon">📖</div>
+                    <h2 class="intro-title">Progetti degli Studenti</h2>
+                    <p class="intro-description">Esplorazioni storiche e riflessioni sulla memoria collettiva</p>
+
+                    <div class="quick-nav">
+                        <a href="#articles-section" class="quick-nav-btn">
+                            <span>Esplora Progetti</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                            </svg>
+                        </a>
+                        <a href="#glossary-section" class="quick-nav-btn">
+                            <span>Glossario</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                        </a>
+                        <a href="#timeline-section" class="quick-nav-btn">
+                            <span>Timeline</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles-section" id="articles-section">
+            <div class="container">
+
+
+
+                <div class="articles-grid" id="articles-grid">
+                    {% for article in articles %}
+                    <article class="article-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}" data-article-id="{{ article.article_id }}" data-group="{{ article.group }}">
+                        <div class="card-glow"></div>
+                        <div class="card-corner-decoration"></div>
+                        <div class="card-inner">
+                            <div class="card-header">
+                                <div class="card-number-wrapper">
+                                    <div class="card-number">
+                                        <span class="number-bg">{{ forloop.counter }}</span>
+                                        {{ forloop.counter }}
+                                    </div>
+                                </div>
+                                <div class="card-stats">
+                                    <div class="stat-item" title="Numero di slide">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                            <line x1="9" y1="3" x2="9" y2="21"/>
+                                        </svg>
+                                        <span>{{ article.slides_number }}</span>
+                                    </div>
+                                    <div class="stat-item" title="Numero di immagini">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                                            <path d="M21 15l-5-5L5 21"/>
+                                        </svg>
+                                        <span>{{ article.images_number }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">{{ article.article_title }}</h3>
+                                <p class="card-description">{{ generated }}</p>
+                            </div>
+                            <div class="card-group">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                                <span>{{ article.group }}</span>
+                            </div>
+                            <a href="{% url 'article' article.article_id %}" class="card-link">
+                                <span>Esplora il progetto</span>
+                                <div class="link-arrow">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                        <line x1="5" y1="12" x2="19" y2="12"/>
+                                        <polyline points="12 5 19 12 12 19"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="container">
+                <div class="quote-card">
+                    <div class="quote-decoration-left"></div>
+                    <div class="quote-decoration-right"></div>
+                    <div class="quote-mark">"</div>
+                    <blockquote class="quote-text">
+                        <span class="quote-highlight">Chi dimentica il passato</span>
+                        è condannato a riviverlo
+                    </blockquote>
+                    <cite class="quote-author">
+                        <span class="author-dash">—</span> Primo Levi
+                    </cite>
+                    <div class="quote-context">
+                        Scrittore e testimone dell'Olocausto
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary-section" class="glossary-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">📚</div>
+                    <h2 class="section-title">Glossario Storico</h2>
+                    <p class="section-subtitle">Termini chiave per comprendere la Shoah</p>
+                </div>
+                <div id="glossary-list" class="glossary-list">
+                    <div class="glossary-loader">
+                        <div class="loader-spinner"></div>
+                        <p>Caricamento glossario...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline-section" class="timeline-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">⏳</div>
+                    <h2 class="section-title">Linea del Tempo</h2>
+                    <p class="section-subtitle">Cronologia degli eventi storici</p>
+                </div>
+                <div class="timeline-wrapper">
+                    <div class="timeline-line"></div>
+                    <div id="timeline-list" class="timeline-list">
+                        <div class="timeline-loader">
+                            <div class="loader-spinner"></div>
+                            <p>Caricamento timeline...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz-section" class="quiz-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-icon">🧠</div>
+            <h2 class="section-title">Mettiti alla Prova</h2>
+        </div>
+        <div class="quiz-grid">
+            {% for quiz in quizzes %}
+            <div class="quiz-card">
+                <div class="quiz-difficulty {{ quiz.difficulty }}">{{ quiz.difficulty|upper }}</div>
+                <h3 class="quiz-title">{{ quiz.title }}</h3>
+                <p class="quiz-text">{{ quiz.description|truncatechars:80 }}</p>
+                <div class="quiz-info">
+                    <span>⏱ {{ quiz.time_limit }} min</span>
+                    <span>🎯 Pass: {{ quiz.passing_score }}%</span>
+                </div>
+                <a href="{% url 'quiz_detail' quiz.id %}" class="btn-quiz">Inizia Test</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+        <section class="memorial-section">
+            <div class="container">
+                <div class="memorial-card">
+                    <div class="memorial-candles">
+                        <div class="candle" style="--delay: 0s"></div>
+                        <div class="candle" style="--delay: 0.2s"></div>
+                        <div class="candle" style="--delay: 0.4s"></div>
+                        <div class="candle" style="--delay: 0.6s"></div>
+                        <div class="candle" style="--delay: 0.8s"></div>
+                        <div class="candle" style="--delay: 1s"></div>
+                    </div>
+                    <h3 class="memorial-title">In Memoria</h3>
+                    <p class="memorial-text">
+                        Ricordiamo le sei milioni di vittime dell'Olocausto e tutti coloro che hanno sofferto durante la Shoah.
+                        La loro memoria ci guida verso un futuro di pace e comprensione.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Torna su">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <script src="{% static 'animation.js' %}"></script>
+    <script>
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+
+        async function fetchJSON(url, options = {}) {
+            const headers = options.headers || {};
+            if (!headers['Content-Type'] && !(options.body instanceof FormData)) {
+                headers['Content-Type'] = 'application/json';
+            }
+            if (!headers['X-CSRFToken']) {
+                const token = getCookie('csrftoken');
+                if (token) headers['X-CSRFToken'] = token;
+            }
+            options.headers = headers;
+
+            try {
+                const res = await fetch(url, options);
+                const contentType = res.headers.get('Content-Type') || '';
+                if (!res.ok) {
+                    return { error: true, status: res.status, statusText: res.statusText, body: (contentType.includes('application/json') ? await res.json().catch(() => null) : null) };
+                }
+                if (contentType.includes('application/json')) {
+                    return await res.json();
+                }
+                return null;
+            } catch (err) {
+                return { error: true, network: true, message: err.message };
+            }
+        }
+
+        async function initReactions() {
+            const containers = document.querySelectorAll('.reactions');
+            containers.forEach(async (container) => {
+                const articleId = container.dataset.articleId;
+                const resp = await fetchJSON(`/api/articles/${articleId}/reactions/`);
+                container.innerHTML = '';
+                const wrapper = document.createElement('div');
+                wrapper.className = 'reactions-wrapper';
+
+                if (!resp || resp.error) {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'reaction-placeholder';
+                    placeholder.innerHTML = '<span class="placeholder-icon">💭</span> Nessuna reazione';
+                    wrapper.appendChild(placeholder);
+                    container.appendChild(wrapper);
+                    return;
+                }
+
+                const reactions = (resp && resp.reactions) ? resp.reactions : {};
+                const reactionEmojis = {
+                    '❤️': '❤️',
+                    '👏': '👏',
+                    '🕯️': '🕯️',
+                    '📚': '📚'
+                };
+
+                Object.keys(reactions).forEach(type => {
+                    const count = reactions[type];
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'reaction-btn';
+                    btn.dataset.type = type;
+                    btn.innerHTML = `
+                        <span class="reaction-type">${reactionEmojis[type] || type}</span>
+                        <span class="reaction-count">${count}</span>
+                        <span class="reaction-ripple"></span>
+                    `;
+                    btn.addEventListener('click', async (e) => {
+                        btn.classList.add('reaction-animating');
+                        const post = await fetchJSON(`/api/add_reaction/${articleId}/`, {
+                            method: 'POST',
+                            body: JSON.stringify({ type })
+                        });
+                        if (post && !post.error && post.count !== undefined) {
+                            btn.querySelector('.reaction-count').textContent = post.count;
+                            btn.classList.add('reaction-added');
+                            setTimeout(() => btn.classList.remove('reaction-added'), 600);
+                        }
+                        setTimeout(() => btn.classList.remove('reaction-animating'), 600);
+                    });
+                    wrapper.appendChild(btn);
+                });
+
+                if (Object.keys(reactions).length === 0) {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'reaction-placeholder';
+                    placeholder.innerHTML = '<span class="placeholder-icon">💭</span> Nessuna reazione';
+                    wrapper.appendChild(placeholder);
+                }
+                container.appendChild(wrapper);
+            });
+        }
+
+        let searchTimeout;
+        async function performSearch(query) {
+            const resultsContainer = document.getElementById('search-results');
+            const searchLoader = document.querySelector('.search-loader');
+
+            if (!query) {
+                resultsContainer.innerHTML = '';
+                resultsContainer.classList.remove('active');
+                return;
+            }
+
+            searchLoader.classList.add('active');
+            const data = await fetchJSON(`/api/search_articles/?q=${encodeURIComponent(query)}`);
+            searchLoader.classList.remove('active');
+
+            resultsContainer.innerHTML = '';
+            resultsContainer.classList.add('active');
+
+            if (!data || data.error) {
+                resultsContainer.innerHTML = '<div class="no-results"><span class="no-results-icon">🔍</span><p>Errore nella ricerca</p></div>';
+                return;
+            }
+
+            if (!data.results || data.results.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results"><span class="no-results-icon">🔍</span><p>Nessun risultato trovato</p></div>';
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'search-grid';
+            data.results.forEach(r => {
+                const card = document.createElement('article');
+                card.className = 'search-card';
+                card.innerHTML = `
+                    <div class="search-card-icon">📄</div>
+                    <h3>${r.title}</h3>
+                    <p>${r.description || 'Nessuna descrizione disponibile'}</p>
+                    <a href="/articles/${r.id}/" class="search-card-link">
+                        Apri progetto
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+            resultsContainer.appendChild(grid);
+        }
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+async function loadGlossary() {
+    const list = document.getElementById('glossary-list');
+    if (!list) return;
+
+    list.innerHTML = '<div class="glossary-loader"><div class="loader-spinner"></div><p>Caricamento...</p></div>';
+    const data = await fetchJSON('/api/glossary_terms/');
+    list.innerHTML = '';
+
+    if (!data || data.error || !Array.isArray(data.terms) || data.terms.length === 0) {
+        list.innerHTML = '<p class="empty-state">Nessun termine disponibile.</p>';
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    data.terms.forEach((t, index) => {
+        const item = document.createElement('div');
+        item.className = 'glossary-item';
+        item.style.animationDelay = `${index * 0.06}s`;
+
+        item.innerHTML = `
+            <div class="glossary-icon">📌</div>
+            <div class="glossary-content">
+                <h3 class="glossary-term">${escapeHtml(t.term)}</h3>
+                <div class="glossary-definition">${escapeHtml(t.definition || '')}</div>
+            </div>
+            <button type="button" class="glossary-expand" aria-expanded="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </button>
+        `;
+
+        item.addEventListener('click', () => {
+            const isExpanded = item.classList.toggle('expanded');
+            const btn = item.querySelector('.glossary-expand');
+            if (btn) btn.setAttribute('aria-expanded', isExpanded);
+        });
+
+        fragment.appendChild(item);
+    });
+
+    list.appendChild(fragment);
+}
+
+        async function loadTimeline() {
+            const list = document.getElementById('timeline-list');
+            const data = await fetchJSON('/api/timeline_events/');
+            list.innerHTML = '';
+
+            if (!data || data.error || !data.events || data.events.length === 0) {
+                list.innerHTML = '<p class="empty-state"><span class="empty-icon">⏳</span>Nessun evento disponibile.</p>';
+                return;
+            }
+
+            data.events.forEach((e, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.style.animationDelay = `${index * 0.15}s`;
+                const date = e.date ? new Date(e.date).toLocaleDateString('it-IT', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }) : '';
+                item.innerHTML = `
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-pulse"></div>
+                    </div>
+                    <div class="timeline-date">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        ${date}
+                    </div>
+                    <div class="timeline-body">
+                        <h3>${e.title}</h3>
+                        <p>${e.short_description || ''}</p>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 30);
+        }
+
+        function createParticles() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        function updateScrollProgress() {
+            const scrollProgress = document.querySelector('.scroll-progress-bar');
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        }
+
+        function toggleBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+
+
+        function filterArticles(group) {
+            const articles = document.querySelectorAll('.article-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            articles.forEach(article => {
+                if (group === 'all' || article.dataset.group === group) {
+                    article.style.display = 'block';
+                    setTimeout(() => article.classList.add('visible'), 10);
+                } else {
+                    article.classList.remove('visible');
+                    setTimeout(() => article.style.display = 'none', 300);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initReactions();
+            loadGlossary();
+            loadTimeline();
+            createParticles();
+
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+
+            const counters = document.querySelectorAll('.stat-number[data-target]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            counters.forEach(counter => observer.observe(counter));
+
+            window.addEventListener('scroll', () => {
+                updateScrollProgress();
+                toggleBackToTop();
+            });
+
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

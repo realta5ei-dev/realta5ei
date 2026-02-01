@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }} - Memoria</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+        }
+
+        .quiz-wrapper {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feedback-card {
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px solid;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .feedback-success {
+            background: rgba(40, 167, 69, 0.15);
+            border-color: #28a745;
+            box-shadow: 0 0 30px rgba(40, 167, 69, 0.2);
+        }
+
+        .feedback-fail {
+            background: rgba(220, 53, 69, 0.15);
+            border-color: #dc3545;
+            box-shadow: 0 0 30px rgba(220, 53, 69, 0.2);
+        }
+
+        .question-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.3s ease;
+        }
+
+        .question-card:hover {
+            border-color: var(--color-accent-primary);
+        }
+
+        .answer-label {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 18px 25px;
+            margin: 12px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .answer-label:hover {
+            background: rgba(18, 130, 162, 0.1);
+            border-color: var(--color-accent-primary);
+        }
+
+        input[type="radio"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--color-accent-primary);
+        }
+
+        .btn-action {
+            background: var(--color-accent-primary);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 20px var(--color-glow);
+        }
+
+        .btn-action:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles-container" id="particles"></div>
+
+    <div class="quiz-wrapper">
+        {% if submitted %}
+            <div class="feedback-card {% if passed %}feedback-success{% else %}feedback-fail{% endif %}">
+                <h1 style="font-size: 3rem; margin-bottom: 10px;">
+                    {% if passed %}Complimenti!{% else %}Riprova{% endif %}
+                </h1>
+                <p style="font-size: 1.4rem; margin-bottom: 20px;">
+                    Hai totalizzato il <strong>{{ percentage|floatformat:0 }}%</strong>
+                </p>
+                <p style="color: var(--color-text-muted);">
+                    Risposte corrette: {{ score }} su {{ total }}
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="{% url 'quiz_detail' quiz.id %}" class="btn-action">Riprova il test</a>
+                    <a href="{% url 'index' %}" class="btn-action" style="background: transparent; border: 1px solid var(--color-border);">Torna alla Home</a>
+                </div>
+            </div>
+        {% else %}
+            <header style="text-align: center; margin-bottom: 60px;">
+                <div class="hero-badge" style="margin: 0 auto 20px;">Quiz</div>
+                <h1 style="font-size: 3rem; color: var(--color-accent-primary); margin-bottom: 15px;">{{ quiz.title }}</h1>
+                <p style="color: var(--color-text-muted); font-size: 1.1rem;">{{ quiz.description }}</p>
+            </header>
+
+            <form method="POST">
+                {% csrf_token %}
+                {% for question in quiz.questions.all %}
+                <div class="question-card">
+                    <h3 style="margin-bottom: 25px; line-height: 1.4;">
+                        <span style="color: var(--color-accent-primary);">{{ forloop.counter }}.</span> {{ question.text }}
+                    </h3>
+
+                    {% for answer in question.answers.all %}
+                    <label class="answer-label">
+                        <input type="radio" name="q_{{ question.id }}" value="{{ answer.id }}" required>
+                        <span>{{ answer.text }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-action">Consegna Risposte</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <script src="{% static 'animation.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof createParticles === 'function') {
+                createParticles();
+            }
+        });
+    </script>
+</body>
+</html>
