@@ -81,7 +81,7 @@
                                 <div class="slide-content-wrapper">
                                     <div class="slide-text-content">
                                         <h2>{{ slide.slide_title }}</h2>
-                                        <p>{{ slide.slide_text }}</p>
+                                        <p>{{ slide.slide_text|safe }}</p>
                                     </div>
 
                                     {% if slide.images.all %}

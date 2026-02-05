@@ -8,19 +8,27 @@ class Article(models.Model):
     slides_number = models.IntegerField()
     images_number = models.IntegerField()
     pdf = models.FileField(default='pdf')
-    group = models.CharField(max_length=300,
-                             choices=[
-                                 ("Gruppo 1: Emanuele Magno, Lara Maglione, Antonio De Luca, Luca Pelerusso",
-                                  "Gruppo 1: Emanuele Magno, Lara Maglione, Antonio De Luca, Luca Pelerusso"),
-                                 ("Gruppo 2: Carmine Ciccarelli, Filippo Cuccurullo, Giuseppe Cotrufo, Antonio Ventriglia, Antonio De Fenza",
-                                  "Gruppo 2: Carmine Ciccarelli, Filippo Cuccurullo, Giuseppe Cotrufo, Antonio Ventriglia, Antonio De Fenza"),
-                                 ("Gruppo 3: Lorenzo Famularo, Giuseppe Luongo, Francesco La Marca, Antonio Talotti",
-                                  "Gruppo 3: Lorenzo Famularo, Giuseppe Luongo, Francesco La Marca, Antonio Talotti"),
-                                 ("Gruppo 4: Alejandro Russo, Francesco Cotroneo, Paolo Campana, Emanuele Iuliano, Alessandro De Fenzo",
-                                  "Gruppo 4: Alejandro Russo, Francesco Cotroneo, Paolo Campana, Emanuele Iuliano, Alessandro De Fenzo"),
-                                 ("Gruppo 5: Emanuele Cardamuro, Lorenzo Di Guida, Paolo Campana, Francesco Cusati, Alessandro De Fenzo",
-                                  "Gruppo 5: Emanuele Cardamuro, Lorenzo Di Guida, Paolo Campana, Francesco Cusati, Alessandro De Fenzo"),
-                             ])
+    group = models.CharField(
+        max_length=300,
+        choices=[
+            (
+                "Gruppo 1: Emanuele Magno, Lara Maglione, Antonio De Luca, Luca Pelerusso, Emanuele Cardamuro",
+                "Gruppo 1: Emanuele Magno, Lara Maglione, Antonio De Luca, Luca Pelerusso, Emanuele Cardamuro"
+            ),
+            (
+                "Gruppo 2: Carmine Ciccarelli, Filippo Cuccurullo, Giuseppe Cotrufo, Antonio Ventriglia, Antonio De Fenza, Lorenzo Di Guida",
+                "Gruppo 2: Carmine Ciccarelli, Filippo Cuccurullo, Giuseppe Cotrufo, Antonio Ventriglia, Antonio De Fenza, Lorenzo Di Guida"
+            ),
+            (
+                "Gruppo 3: Lorenzo Famularo, Giuseppe Luongo, Francesco La Marca, Antonio Talotti, Francesco Cusati",
+                "Gruppo 3: Lorenzo Famularo, Giuseppe Luongo, Francesco La Marca, Antonio Talotti, Francesco Cusati"
+            ),
+            (
+                "Gruppo 4: Alejandro Russo, Francesco Cotroneo, Paolo Campana, Emanuele Iuliano, Alessandro De Fenzo",
+                "Gruppo 4: Alejandro Russo, Francesco Cotroneo, Paolo Campana, Emanuele Iuliano, Alessandro De Fenzo"
+            ),
+        ]
+    )
 
 
 class Presentation(models.Model):
